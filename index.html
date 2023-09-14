@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="src/style.css">
-    <script type="text/javascript" src="./js/draggable-resizable-dialog.js"></script>
-    <script type="text/javascript" src="./js/pickletree.js"></script>
+   
     <style>
         .show-button {
             height: 36px;
@@ -67,147 +66,53 @@
     If you add buttons you need additional elements with class "buttonpane" and "buttonset".
     width and height are optional.
     -->
-    <div id="dialog" class="dialog" style="min-width:400px; min-height:280px;">
+    <div id="dialog" class="dialog" style="min-width:600px; min-height:280px;">
         <div class="titlebar">WIDGET MONITOR</div>
-        <button name="close">&times;<!-- enter symbol here like &times; or &#x1f6c8; or use the default X if empty --></button>
+        <button name="close">&times;</button>
         <div class="content">
-            <div class="row">
-                <div class="col-4">
-                    <div id="div_tree" class="tree"></div>
-        
+            <div class="button-box">
+                <div class="button-box_item">Section 1</div>
+                <div class="button-box_item">Section 2</div>
+                <div class="button-box_item">Section 3</div>
+                <div class="button-box_item">Section 4</div>
+                <div class="button-box_item">Section 5</div>
+                <div class="button-box_item">Section 6</div>
+                <div class="button-box_item">Section 7</div>
+                <div class="button-box_item">Section 8</div>
+                <div class="button-box_item">Section 9</div>
+                <div class="button-box_item">Section 10</div>
+            </div>
+    
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Section 1 <span class="arrow">&#5167;</span>
+                    </div>
+                    <div class="accordion-content">Content of section 1.</div>
                 </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Section 2 <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">Content of section 2.</div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Section 3 <span class="arrow">▼</span>
+                    </div>
+                    <div class="accordion-content">Content of section 3.</div>
+                </div>
+                <!-- Más secciones del acordeón aquí -->
             </div>
         </div>
-       <!--  <div class="buttonpane">
-            <div class="buttonset">
-                <button name="ok">OK</button>
-                <button name="cancel">Cancel</button>
-            </div>
-        </div> -->
     </div>
+    
 
 
-
-    <script>
-        const tree = new PickleTree({
-            c_target: 'div_tree',
-            rowCreateCallback: (node) => {
-                //console.log(node)
-            },
-            switchCallback: (node) => {
-                //console.log(node)
-            },
-            drawCallback: () => {
-                //console.log('tree drawed ..');
-            },
-            dragCallback: (node) => {
-                console.log(node);
-            },
-            dropCallback: (node) => {
-                //retuns node with new parent and old parent in 'old_parent' key!!
-                console.log(node);
-            },
-            c_config: {
-                //start as folded or unfolded
-                foldedStatus: false,
-                //for logging
-                logMode: false,
-                //for switch element
-                switchMode: true,
-                //for automaticly select childs
-                autoChild: true,
-                //for automaticly select parents
-                autoParent: true,
-                //for drag / drop
-                drag: true,
-                //for ordering
-                order: true
-            },
-            c_data: [{
-                n_id: 1,
-                n_title: 'falan1',
-                n_parentid: 0,
-                n_order_num : 0,
-                n_checked: true,
-                n_elements: [{
-                    icon: 'fa fa-edit',
-                    title: 'Edit',
-                    //context button click event
-                    onClick: (node) => {
-                        console.log('edit - ' + node.id);
-                    }
-                }, {
-                    icon: 'fa fa-trash',
-                    title: 'Delete',
-                    onClick: (node) => {
-                        console.log('delete - ' + node.id);
-                    }
-                }],
-            }, {
-                n_id: 2,
-                n_title: 'falan2',
-                n_order_num : 0,
-                n_parentid: 0
-            }, {
-                n_id: 3,
-                n_title: 'falan3',
-                n_parentid: 0,
-                n_order_num : 0,
-            }, {
-                n_id: 4,
-                n_order_num : 0,
-                n_title: 'falan1-1',
-                n_parentid: 1
-            }, {
-                n_id: 5,
-                n_order_num : 0,
-                n_title: 'falan1-2',
-                n_parentid: 1
-            }, {
-                n_id: 10,
-                n_order_num : 0,
-                n_title: 'falan1-2-1',
-                n_parentid: 5
-            }, {
-                n_id: 11,
-                n_order_num : 0,
-                n_title: 'falan1-2-1-1',
-                n_parentid: 10
-            }, {
-                n_id: 6,
-                n_order_num : 0,
-                n_title: 'falan2-1',
-                n_parentid: 2
-            }, {
-                n_id: 7,
-                n_order_num : 0,
-                n_title: 'falan2-2',
-                n_parentid: 2
-            }, {
-                n_id: 8,
-                n_order_num : 0,
-                n_title: 'falan2-3',
-                n_parentid: 2
-            }, {
-                n_id: 9,
-                n_order_num : 0,
-                n_title: 'falan1-2-2',
-                n_parentid: 5
-            }]
-        });
-        /*for (let i = 0; i < 3; i++) {
-            tree.createNode('Falan_' + i, i);
-            for (let t = 0; t < 3; t++) {
-                tree.createNode('Falan1_' + t + i, t + '_' + i + '_sub1', [], tree.getNode('node_' + i));
-                for (let j = 0; j < 3; j++) {
-                    tree.createNode('Falan1_' + t + i, t + '_' + i + '_sub2', [], tree.getNode('node_' + t + '_' + i + '_sub1'));
-                }
-            }
-        }*/
-    </script>
+<!-- <iframe src="https://www.hmhotels.net/es/" frameborder="0" scrolling="no" width="100%" height="100%"></iframe> -->
 
 
-<iframe src="https://www.hmhotels.net/es/" frameborder="0" scrolling="no" width="100%" height="100%"></iframe>
-
+<script type="text/javascript" src="./js/draggable-resizable-dialog.js"></script>
+<script type="text/javascript" src="./js/accordion.js"></script>
 </body>
 </html>
